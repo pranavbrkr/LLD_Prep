@@ -36,9 +36,10 @@ def clientCode(creator: Creator):
   print(f"Client: No fecking idea who the creator is")
   print(f"{creator.someOperation()}")
 
-print("Launched with ConcreteCreator1")
-clientCode(ConcreteCreator1())
-print("\n")
+if __name__ == "__main__":
+  print("Launched with ConcreteCreator1")
+  clientCode(ConcreteCreator1())
+  print("\n")
 
-print("Launched with ConcreteCreator2")
-clientCode(ConcreteCreator2())
+  print("Launched with ConcreteCreator2")
+  clientCode(ConcreteCreator2())

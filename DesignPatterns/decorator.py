@@ -55,28 +55,28 @@ class InvisibilityDecorator(CharacterDecorator):
   
 
 # Client code
+if __name__ == "__main__":
+  character = BasicCharacter()
+  print(character.getDescription())
+  print(character.getDamage())
 
-character = BasicCharacter()
-print(character.getDescription())
-print(character.getDamage())
+  double_damage_decorator = DoubleDamageDecorator(character)
+  fireball_decorator = FireballDecorator(character)
+  invisibility_decorator = InvisibilityDecorator(character)
 
-double_damage_decorator = DoubleDamageDecorator(character)
-fireball_decorator = FireballDecorator(character)
-invisibility_decorator = InvisibilityDecorator(character)
+  print(double_damage_decorator.getDescription())
+  print(double_damage_decorator.getDamage())
 
-print(double_damage_decorator.getDescription())
-print(double_damage_decorator.getDamage())
+  print(fireball_decorator.getDescription())
+  print(fireball_decorator.getDamage())
 
-print(fireball_decorator.getDescription())
-print(fireball_decorator.getDamage())
+  print(invisibility_decorator.getDescription())
+  print(invisibility_decorator.getDamage())
 
-print(invisibility_decorator.getDescription())
-print(invisibility_decorator.getDamage())
+  double_fireball_character = DoubleDamageDecorator(FireballDecorator(character))
+  print(double_fireball_character.getDescription())
+  print(double_fireball_character.getDamage())
 
-double_fireball_character = DoubleDamageDecorator(FireballDecorator(character))
-print(double_fireball_character.getDescription())
-print(double_fireball_character.getDamage())
-
-invisibility_double_fireball_character = InvisibilityDecorator(DoubleDamageDecorator(FireballDecorator(character)))
-print(invisibility_double_fireball_character.getDescription())
-print(invisibility_double_fireball_character.getDamage())
+  invisibility_double_fireball_character = InvisibilityDecorator(DoubleDamageDecorator(FireballDecorator(character)))
+  print(invisibility_double_fireball_character.getDescription())
+  print(invisibility_double_fireball_character.getDamage())

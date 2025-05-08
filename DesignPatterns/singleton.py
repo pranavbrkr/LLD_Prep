@@ -21,9 +21,9 @@ class Singleton:
         cls._instance = super(Singleton, cls).__new__(cls)
     return cls._instance
   
-
-count = Singleton()
-print(count.getCount())
-print(count.addCount())
-count2 = Singleton()
-print(count2.getCount())
+if __name__ == "__main__":
+  count = Singleton()
+  print(count.getCount())
+  print(count.addCount())
+  count2 = Singleton()
+  print(count2.getCount())
