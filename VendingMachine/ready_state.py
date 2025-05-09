@@ -18,9 +18,11 @@ class ReadyState(VendingMachineState):
     self.checkPaymentStatus()
   
   def cancelTransaction(self):
-    change = self.vending_machine.total_payment
-    if change > 0:
-      print(f"Transaction cancelled. Returning payment: ${change:.2f}")
+    inserted = self.vending_machine.inserted_money
+    if inserted:
+      print(f"Transaction cancelled. Returning")
+      for denom, count in inserted.items():
+        print(f"${denom.value}: {count}")
     else:
       print("Transaction cancelled. No payment to return")
     self.vending_machine.resetPayment()
@@ -34,5 +36,5 @@ class ReadyState(VendingMachineState):
     print("Please make payment first")
   
   def checkPaymentStatus(self):
-    if self.vending_machine.total_payment >= self.vending_machine.selected_product.getPrice():
+    if self.vending_machine.getTotalPayment() >= self.vending_machine.selected_product.getPrice():
       self.vending_machine.setState(self.vending_machine.dispense_state)

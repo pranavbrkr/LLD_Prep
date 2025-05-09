@@ -28,6 +28,7 @@ class VendingMachine:
     self.return_change_state = ReturnChangeState(self)
     self.current_state = self.idle_state
     self.selected_product: Product = None
+    self.inserted_money = {}
     self.total_payment = 0.0
 
   @classmethod
@@ -53,16 +54,34 @@ class VendingMachine:
     self.current_state = state
   
   def addCoin(self, coin: Coin):
-    self.total_payment += coin.value
+    self.inserted_money[coin] = self.inserted_money.get(coin, 0) + 1
   
   def addNote(self, note: Note):
-    self.total_payment += note.value
+    self.inserted_money[note] = self.inserted_money.get(note, 0) + 1
   
   def cancelTransaction(self):
     self.current_state.cancelTransaction()
   
+  def getTotalPayment(self):
+    return sum(k.value * v for k, v in self.inserted_money.items())
+
+  def calculateChange(self, amount: float) -> dict:
+    change_map = {}
+    denominations = list(Note) + list(Coin)
+    denominations.sort(key = lambda d: d.value, reverse = True)
+
+    remaining = round(amount, 2)
+
+    for denom in denominations:
+      count = int(remaining // denom.value)
+      if count > 0:
+        change_map[denom] = count
+        remaining -= round(denom.value * count, 2)
+    
+    return change_map
+
   def resetPayment(self):
-    self.total_payment = 0.0
+    self.inserted_money.clear()
   
   def resetSelectedProduct(self):
     self.selected_product = None

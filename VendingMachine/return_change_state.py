@@ -20,9 +20,12 @@ class ReturnChangeState(VendingMachineState):
     print("Product already dispensed. Please collect the change")
   
   def returnChange(self):
-    change = self.vending_machine.total_payment - self.vending_machine.selected_product.getPrice()
-    if change > 0:
-      print(f"Change returned: ${change:.2f}")
+    change = self.vending_machine.getTotalPayment() - self.vending_machine.selected_product.getPrice()
+    change_map = self.vending_machine.calculateChange(change)
+    if change_map:
+      print(f"Change returned:")
+      for denom, count in change_map.items():
+        print(f"${denom.value}: {count}")
     else:
       print("No change to return")
     self.vending_machine.resetPayment()
