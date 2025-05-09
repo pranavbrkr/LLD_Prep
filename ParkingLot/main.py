@@ -10,8 +10,8 @@ from ticket_manager import TicketManager
 from vehicle import Vehicle
 
 if __name__ == "__main__":
-  lot = ParkingLot()
-  ticket_manager = TicketManager()
+  lot = ParkingLot.getInstance()
+  ticket_manager = TicketManager.getInstance()
   payment_processor = PaymentProcessor()
 
   level_0 = ParkingLevel(level_number=0)

@@ -1,3 +1,4 @@
+from threading import Lock
 from collections import defaultdict
 from typing import List
 from display_board import DisplayBoard
@@ -7,9 +8,19 @@ from vehicle import Vehicle
 
 
 class ParkingLot:
+  _instance = None
+  _lock = Lock()
+
   def __init__(self):
     self._levels: List[ParkingLevel] = []
     self._display_board = DisplayBoard()
+  
+  @classmethod
+  def getInstance(cls):
+    with cls._lock:
+      if cls._instance is None:
+        cls._instance = cls()
+    return cls._instance
 
   def addLevel(self, level: ParkingLevel):
     self._levels.append(level)

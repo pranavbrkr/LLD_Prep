@@ -1,10 +1,21 @@
+from threading import Lock
 from parking_spot import ParkingSpot
 from ticket import Ticket
 from vehicle import Vehicle
 
 class TicketManager:
+  _instance = None
+  _lock = Lock()
+
   def __init__(self):
     self._active_tickets = {}
+
+  @classmethod
+  def getInstance(cls):
+    with cls._lock:
+      if cls._instance is None:
+        cls._instance = cls()
+    return cls._instance
 
   def generateTicket(self, vehicle: Vehicle, spot: ParkingSpot) -> Ticket:
     ticket = Ticket(vehicle.getLicensePlate(), vehicle.getVehicleType(), spot)
