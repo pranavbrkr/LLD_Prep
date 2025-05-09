@@ -13,6 +13,9 @@ class ReturnChangeState(VendingMachineState):
   def insertNote(self, note):
     print("Please collect the change first")
   
+  def cancelTransaction(self):
+    print("No transaction to cancel at this stage.")
+
   def dispenseProduct(self):
     print("Product already dispensed. Please collect the change")
   
@@ -20,8 +23,8 @@ class ReturnChangeState(VendingMachineState):
     change = self.vending_machine.total_payment - self.vending_machine.selected_product.getPrice()
     if change > 0:
       print(f"Change returned: ${change:.2f}")
-      self.vending_machine.resetPayment()
     else:
       print("No change to return")
+    self.vending_machine.resetPayment()
     self.vending_machine.resetSelectedProduct()
     self.vending_machine.setState(self.vending_machine.idle_state)

@@ -17,6 +17,10 @@ class VendingMachineState(ABC):
     pass
 
   @abstractmethod
+  def cancelTransaction(self):
+    pass
+
+  @abstractmethod
   def dispenseProduct(self):
     pass
 

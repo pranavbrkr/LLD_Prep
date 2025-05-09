@@ -58,8 +58,11 @@ class VendingMachine:
   def addNote(self, note: Note):
     self.total_payment += note.value
   
+  def cancelTransaction(self):
+    self.current_state.cancelTransaction()
+  
   def resetPayment(self):
-    self.total_payment = 0
+    self.total_payment = 0.0
   
   def resetSelectedProduct(self):
     self.selected_product = None

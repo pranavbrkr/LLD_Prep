@@ -18,6 +18,9 @@ class IdleState(VendingMachineState):
   def insertNote(self, note):
     print("Please select a product first")
   
+  def cancelTransaction(self):
+    print("No transaction to cancel at this stage.")
+  
   def dispenseProduct(self):
     print("Please select a product first")
   

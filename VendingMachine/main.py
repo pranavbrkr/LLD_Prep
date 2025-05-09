@@ -22,6 +22,8 @@ if __name__ == "__main__":
   vending_machine.dispenseProduct()
   vending_machine.returnChange()
 
+  print("####################")
+
   vending_machine.selectProduct(pepsi)
   vending_machine.insertCoin(Coin.QUARTER)
   vending_machine.dispenseProduct()
@@ -32,3 +34,9 @@ if __name__ == "__main__":
   vending_machine.insertCoin(Coin.QUARTER)
   vending_machine.dispenseProduct()
   vending_machine.returnChange()
+
+  print("####################")
+
+  vending_machine.selectProduct(coke)
+  vending_machine.insertCoin(Coin.QUARTER)
+  vending_machine.cancelTransaction()

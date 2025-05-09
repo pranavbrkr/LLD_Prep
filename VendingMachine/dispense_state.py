@@ -13,6 +13,9 @@ class DispenseState(VendingMachineState):
   def insertNote(self, note):
     print("Payment already made. Please collect the dispensed product")
 
+  def cancelTransaction(self):
+    print("No transaction to cancel at this stage.")
+
   def dispenseProduct(self):
     product = self.vending_machine.selected_product
     self.vending_machine.inventory.updateQuantity(product, self.vending_machine.inventory.getQuantity(product) - 1)
