@@ -7,7 +7,7 @@ class TicketManager:
     self._active_tickets = {}
 
   def generateTicket(self, vehicle: Vehicle, spot: ParkingSpot) -> Ticket:
-    ticket = Ticket(vehicle.getLicensePlate(), vehicle.getVehicleType, spot)
+    ticket = Ticket(vehicle.getLicensePlate(), vehicle.getVehicleType(), spot)
     self._active_tickets[ticket.getTicketId()] = ticket
     return ticket
 

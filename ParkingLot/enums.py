@@ -1,9 +1,9 @@
 from enum import Enum
 
 class VehicleType(Enum):
-  MOTORBIKE = 1
-  CAR = 2
-  TRUCK = 3
+  MOTORBIKE = "Motorbike"
+  CAR = "Car"
+  TRUCK = "Truck"
 
 class PaymentMethod(Enum):
   CASH = "Cash"
