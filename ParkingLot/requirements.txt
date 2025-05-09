@@ -1,0 +1,7 @@
+Multiple floors, each of which contain multiple parking spots
+Fixed spot type, Motorbike, Car and Truck
+Ticket assigned on entry, contains license plate, type, entry timestamp and assigned spot
+Closest spot available assigned
+Billing is per hour, which varies according to th type
+Display board at the entrance to show available spots per floor
+Cash and card payments
