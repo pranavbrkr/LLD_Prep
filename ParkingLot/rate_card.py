@@ -2,9 +2,9 @@ from enums import VehicleType
 
 class RateCard:
   _rates = {
-    VehicleType.MOTORBIKE: 10.0,
-    VehicleType.CAR: 15.0,
-    VehicleType.TRUCK: 20.0,
+    VehicleType.MOTORBIKE.value: 10.0,
+    VehicleType.CAR.value: 15.0,
+    VehicleType.TRUCK.value: 20.0,
   }
 
   @staticmethod
