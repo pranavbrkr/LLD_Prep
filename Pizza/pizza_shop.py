@@ -184,7 +184,7 @@ class Store:
   def createDrink(self, name: str) -> Base:
     if name not in self.drink_prices:
       raise ValueError(f"Drink '{name}' not found in store price list")
-    return Topping(name, self.drink_prices[name])
+    return Drink(name, self.drink_prices[name])
   
   def getDeals(self) -> List[Deal]:
     return self.deals.copy()
