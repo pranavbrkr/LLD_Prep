@@ -1,10 +1,3 @@
-from decimal import Decimal
-from .store import Store
-from .order import Order
-from .buy_one_get_one_free_pizza_deal import BuyOneGetOneFreePizzaDeal
-from .free_drink_with_pizza_deal import FreeDrinkWithPizzaDeal
-from .most_expensive_topping_free_deal import MostExpensiveToppingFreeDeal
-
 def main():
   tempe_store = Store("Tempe")
   tempe_store.addBasePrice("Thin Crust", Decimal("5.0"))
