@@ -1,32 +1,27 @@
-Define a abstract OrderItem class with name and price attributes
-Define Base, Drink, Topping class which extend this abstract class
+Firstly
+We define abstract OrderItem class, with name and price
+Define Topping, Base, Drink which extend this OrderItem class
+
+Define Pizza class which also extends this OrderItem class
+This has pizza_base, and list of toppings
+And methods to add toppings and get price
 
 
-Pizza class: extends OrderItemhas the base and list of toppings
-attr: base_pizza, list(toppings)
-methods: add topping, get toppings, get price
+Catalog class has dictionaries of base prices, topping prices and drink prices
+And methods to create new of those items or add some price to existing 
 
-Catalog class: holds all the base prices, topping prices, drink prices
-attr: base_prices, topping_prices, drink_prices .... (all dicts)
-methods: add baseprice, topping price and drink prices, createBase, createTopping and createDrink
-
-PizzaBuilder: class to construct Pizza
-attr: catalog, base, toppings
-methods: withBase, addTopping and build
-
-Order class:
-attr: items
-methods: add item, get Items and calculate Subtotal
-
-class Deal: abstract class to calculate Discount
-
-class DiscountCalculator: 
-contains deals and method to calculate discount(call to all calculateDiscount for all deals)
-
-class FreeDrinkWithPizzaDeal: extends Deal
-contains calculateDiscount method to calculate discount where cheapest drink is free
+Now
+We have PizzaBuilder class
+this has catalog, base and list of toppings
+And following behaviors
+withBase() returns self with createBase call to catalog
+addTopping to add toppings to self and return it
+build() creates a Pizza object with the base and adds toppings to that pizza and returns it
 
 
-Store class:
-contains name, catalog and deals
-methods to add deal, get deal and buildPizza
+Then you have order class that contains list of items and methods to calculate subtotal
+
+
+Then for discounts
+
+We define one abstract Deal class with calculateDiscount(order)
