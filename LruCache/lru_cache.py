@@ -7,13 +7,25 @@ class Node:
     self.prev = self.next = None
 
 class LRU:
-  def __init__(self, capacity):
+  _instance = None
+  _lock = Lock()
+
+  def __new__(cls, capacity):
+    with cls._lock:
+      if cls._instance is None:
+        cls._instance = super().__new__(cls)
+        cls._instance._init_once(capacity)
+      return cls._instance
+
+  def _init_once(self, capacity):
+    if hasattr(self, "_initialized"):
+      return
     self.capacity = capacity
     self.cache = {}
     self.mru, self.lru = Node(-1, -1), Node(-1, -1)
     self.lru.next = self.mru
     self.mru.prev = self.lru
-    self.lock = Lock()
+    self._initialized = True
 
   def insert(self, node):
     prv = self.mru.prev
@@ -28,7 +40,7 @@ class LRU:
     nxt.prev = prv
   
   def put(self, key, val):
-    with self.lock:
+    with self._lock:
       if key in self.cache:
         self.remove(self.cache[key])
       self.cache[key] = Node(key, val)
@@ -40,7 +52,7 @@ class LRU:
         del self.cache[lru.key]
   
   def get(self, key):
-    with self.lock:
+    with self._lock:
       if key in self.cache:
         self.remove(self.cache[key])
         self.insert(self.cache[key])
