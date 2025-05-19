@@ -1,3 +1,5 @@
+from threading import Lock
+
 class Node:
   def __init__(self, key, val):
     self.key = key
@@ -11,6 +13,7 @@ class LRU:
     self.mru, self.lru = Node(-1, -1), Node(-1, -1)
     self.lru.next = self.mru
     self.mru.prev = self.lru
+    self.lock = Lock()
 
   def insert(self, node):
     prv = self.mru.prev
@@ -25,22 +28,24 @@ class LRU:
     nxt.prev = prv
   
   def put(self, key, val):
-    if key in self.cache:
-      self.remove(self.cache[key])
-    self.cache[key] = Node(key, val)
-    self.insert(self.cache[key])
+    with self.lock:
+      if key in self.cache:
+        self.remove(self.cache[key])
+      self.cache[key] = Node(key, val)
+      self.insert(self.cache[key])
 
-    if self.capacity < len(self.cache):
-      lru = self.lru.next
-      self.remove(lru)
-      del self.cache[lru.key]
+      if self.capacity < len(self.cache):
+        lru = self.lru.next
+        self.remove(lru)
+        del self.cache[lru.key]
   
   def get(self, key):
-    if key in self.cache:
-      self.remove(self.cache[key])
-      self.insert(self.cache[key])
-      return self.cache[key].val
-    return -1
+    with self.lock:
+      if key in self.cache:
+        self.remove(self.cache[key])
+        self.insert(self.cache[key])
+        return self.cache[key].val
+      return -1
   
 if __name__ == "__main__":
   lru = LRU(2)
