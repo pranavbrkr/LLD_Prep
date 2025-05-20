@@ -3,6 +3,7 @@ from typing import List, Optional
 from enum import Enum
 
 class FileType(Enum):
+  DIRECTORY = 0
   TEXT = 1
   LOG = 2
   BINARY = 3
@@ -57,11 +58,11 @@ class FindCommand:
           output.append(child)
 
 if __name__ == "__main__":
-  root = File("root", 0, 0, True, [
+  root = File("root", 0, FileType.DIRECTORY, True, [
     File("a.txt", 1000, FileType.TEXT),
     File("b.log", 800, FileType.LOG),
     File("c.bin", 600, FileType.BINARY),
-    File("sub_dir", 0, 0, True, [
+    File("sub_dir", 0, FileType.DIRECTORY, True, [
       File("d.log", 1100, FileType.LOG),
       File("e.txt", 110, FileType.TEXT),
     ])
