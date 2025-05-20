@@ -33,5 +33,10 @@ set employee.manager_id to new manager id
 Add the employee id to manager_to_reportees[new manager id] list
 
 
-5. printOrgChart()
+5. getAllReportees(manager_id)
+Define dfs function to look at every reportee in manager_to_reportees, add them to result and call dfs for them
+call this dfs function for manager_id
+
+
+6. printOrgChart()
 Iterate through manager_to_reportees items() and get manager name, reportee names in an array and display those

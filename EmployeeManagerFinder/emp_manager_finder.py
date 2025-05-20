@@ -28,7 +28,7 @@ class OrgChart:
     emp = self.employees.get(employee_id)
 
     if not emp:
-      print(f"Employee with id {emp.id} not found")
+      print(f"Employee with id {employee_id} not found")
       return None
 
     if emp.manager_id is None:
@@ -37,7 +37,7 @@ class OrgChart:
 
     return self.employees.get(emp.manager_id)
   
-  def getManagerChain(self, employee_id: id) -> List[Employee]:
+  def getManagerChain(self, employee_id: int) -> List[Employee]:
     chain = []
     current = self.employees.get(employee_id)
 
@@ -68,6 +68,15 @@ class OrgChart:
     if new_manager_id is not None:
       self.manager_to_reportees.setdefault(new_manager_id, []).append(employee_id)
   
+  def getAllReportees(self, manager_id: int) -> List[Employee]:
+    result = []
+    def dfs(mid):
+      for eid in self.manager_to_reportees.get(mid, []):
+        result.append(self.employees[eid])
+        dfs(eid)
+    dfs(manager_id)
+    return result
+
   def printOrgChart(self):
     print("Org Chart:")
     for manager_id, reportees in self.manager_to_reportees.items():
@@ -95,5 +104,6 @@ if __name__ == "__main__":
   manager = org.getManager(4)
   print(f"David's new manager: {manager}")
 
+  print(f"Alice's all reportees: {org.getAllReportees(1)}")
   
   org.printOrgChart()
