@@ -29,8 +29,9 @@ class FileSystem:
     parent = self._traverse(dir_path)
     if file_name not in parent.children:
       parent.children[file_name] = FileNode(is_file = True)
-      file_node: FileNode = parent.children[file_name]
-      file_node.content = content
+
+    file_node: FileNode = parent.children[file_name]
+    file_node.content += content
   
   def readContentFromFile(self, filePath: str):
     parts = [p for p in filePath.split('/') if p]
@@ -46,5 +47,5 @@ fs.mkdir("/a/b/c")
 fs.addContentToFile("/a/b/c/d.txt", "Hello")
 print(fs.readContentFromFile("/a/b/c/d.txt"))
 
-fs.addContentToFile("/a/b/c/d.txt", "World")
-print(fs.readContentFromFile("/a/b/c/d.txt"))
+fs.addContentToFile("/a/b/c/e/k.txt", "World")
+print(fs.readContentFromFile("/a/b/c/e/k.txt"))
